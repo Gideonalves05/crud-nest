@@ -11,7 +11,7 @@ export class UsersService {
 constructor(@InjectModel(User.name) private UserModel: Model<UserDocument>) {}
 
   create(createUserDto: CreateUserDto) {
-    const user = new this.UserModel(CreateUserDto);
+    const user = new this.UserModel(createUserDto);
     return user.save();
   }
 
@@ -27,7 +27,7 @@ findOne(id: string) {
     return this.UserModel.findByIdAndUpdate({
         _id: id,
     },{
-        updateUserDto,
+    $Set:  updateUserDto,
         
     },{
         new: true,
